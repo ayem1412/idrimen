@@ -1,5 +1,3 @@
-// @ts-check
-
 import eslint from '@eslint/js';
 import { defineConfig } from 'eslint/config';
 import tseslint from 'typescript-eslint';
@@ -9,7 +7,7 @@ import globals from 'globals';
 
 export default defineConfig(
   {
-    ignores: ['src-tauri/**', 'vite.config.ts', 'eslint.config.mjs'],
+    ignores: ['src-tauri/**', 'vite.config.ts', 'eslint.config.ts'],
   },
   {
     files: ['**/*.{js,jsx,mjs,cjs,ts,tsx}'],
