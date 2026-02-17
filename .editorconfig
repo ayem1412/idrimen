@@ -9,6 +9,8 @@ end_of_line = lf
 
 [*.{js,mjs,json,ts,tsx,prettierrc,css}]
 indent_size = 2
+max_line_length = 80
 
 [*.{rs}]
 indent_size = 4
+max_line_length = 100
