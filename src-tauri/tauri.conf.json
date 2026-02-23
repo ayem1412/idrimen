@@ -14,7 +14,8 @@
       {
         "title": "idrimen",
         "width": 800,
-        "height": 600
+        "height": 600,
+        "fullscreen": true
       }
     ],
     "security": {
