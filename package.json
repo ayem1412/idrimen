@@ -11,7 +11,8 @@
     "format": "prettier . --write",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "tauri:dev": "bun format && bun lint:fix && bun tauri dev"
+    "cargo:fmt": "cargo +nightly fmt -v --manifest-path ./src-tauri/Cargo.toml",
+    "tauri:dev": "bun format && bun lint:fix && bun cargo:fmt && bun tauri dev"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",

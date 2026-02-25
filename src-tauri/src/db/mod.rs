@@ -1,21 +1,30 @@
-use std::fs;
+use std::fs::{self, OpenOptions};
 
 use sqlx::SqlitePool;
-use tauri::{AppHandle, Manager};
+use tauri::{AppHandle, Manager, Runtime};
 
 /// Create an SQLite connection pool
 /// # Arguments
 /// * `app_handle` - The tauri App Handle
-pub async fn connect(app_handle: &AppHandle) -> Result<SqlitePool, sqlx::Error> {
+pub async fn connect<R: Runtime>(app_handle: &AppHandle<R>) -> Result<SqlitePool, sqlx::Error> {
     // Fetch the Application's data directory
-    let mut app_data_dir = app_handle.path().app_data_dir().expect("COULD NOT FIND APP_DATA_DIR");
+    let mut app_data_dir =
+        app_handle.path().app_data_dir().expect("COULD NOT RETRIEVE APP_DATA_DIR");
+
+    if !app_data_dir.exists() {
+        fs::create_dir_all(&app_data_dir).expect("COULD NOT CREATE APP_DATA_DIR");
+    }
 
     // Append idrimen.sqlite3 to it
     app_data_dir.push("idrimen.sqlite3");
 
     // Create the database path if it doesn't exist
     if !app_data_dir.exists() {
-        fs::File::create(&app_data_dir).expect("COULD NOT CREATE DB FILE");
+        OpenOptions::new()
+            .write(true)
+            .create(true)
+            .open(&app_data_dir)
+            .expect("COULD NOT CREATE DB FILE");
     }
 
     // Connect and return the pool
