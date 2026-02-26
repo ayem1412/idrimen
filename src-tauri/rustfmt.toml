@@ -1,7 +1,13 @@
 # Run rustfmt with this config (it should be picked up automatically).
+edition = "2024"
+max_width = 120
 style_edition = "2024"
 use_small_heuristics = "Max"
 merge_derives = false
 group_imports = "StdExternalCrate"
 imports_granularity = "Module"
 use_field_init_shorthand = true
+comment_width = 100
+match_block_trailing_comma = true
+wrap_comments = true
+error_on_line_overflow = true

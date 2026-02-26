@@ -13,8 +13,7 @@ pub fn run() {
     tauri::Builder::default()
         .setup(|app| {
             tauri::async_runtime::block_on(async move {
-                let pool =
-                    db::connect(app.handle()).await.expect("COULD NOT CONNECT TO THE DATABASE!");
+                let pool = db::connect(app.handle()).await.expect("COULD NOT CONNECT TO THE DATABASE!");
 
                 app.manage(pool);
             });
